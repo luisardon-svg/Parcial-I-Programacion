@@ -1,0 +1,12 @@
+# Audio files - no subir canciones a GitHub
+*.mp3
+Canciones_favs/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Sistema
+.DS_Store
