@@ -7,7 +7,7 @@ import streamlit as st
 
 #Página web:
 
-st.set_page_config(
+st.set_page_config(         #Configuramos la pestaña para la página web
     page_title= "🎵 Mis Canciones Favoritas",
     page_icon = "🎵",
     layout = "wide",
@@ -15,15 +15,15 @@ st.set_page_config(
 )
 
 
-CARPETA_SCRIPT = os.path.dirname(os.path.abspath(__file__))
-CARPETA_CANCIONES = os.path.join(CARPETA_SCRIPT, "..", "Canciones_favs")
+CARPETA_SCRIPT = os.path.dirname(os.path.abspath(__file__))     #Creamos carpeta para análisis de las canciones descargadas
+CARPETA_CANCIONES = os.path.join(CARPETA_SCRIPT, "..", "Canciones_favs")  #Carpeta caniones con el path hacia la carpeta "Canciones_favs"
 
 #Puntuación subjetiva
 #Organizado en tuplas
 
 #Tempo (BPM, Beats per minute)
 RANGOS_TEMPO = [
-    (0, 60, 40, 50),
+    (0, 60, 40, 50),      #(valor_min  valor_max (BPS)  puntaje_min   puntaje_max)
     (60, 90, 51, 65),
     (90, 110, 66, 80),
     (110, 130, 81, 90),
@@ -92,29 +92,29 @@ PONDERACION = {
 
 #3. Funciones de operación
 
-def asignar_puntaje(valor, rangos):  #
+def asignar_puntaje(valor, rangos):  #1ra definición -- asignamos puntaje utilizando interpolación lineal del rango establecido previamente
     """
     Convierte un valor númerico en un puntaje subjetivo,
     usando interpolación lineal dentro del rango correspondiente
     """
     for (v_min, v_max, p_min, p_max) in rangos:
-        if v_min <= valor <= v_max:
+        if v_min <= valor <= v_max:   #que la interpolación comience en el valor del medio para ponderar
             if v_max == v_min:
                 return p_min
-            proporcion = (valor - v_min) / (v_max - v_min)
+            proporcion = (valor - v_min) / (v_max - v_min)   #
             return p_min + proporcion * (p_max - p_min)
         
     if valor < rangos[0][0]:  #Solo por si el valor cae fuera de todos los rangos definidos, se asigna al extremo mas cercano
         return rangos[0][2]
     return rangos[-1][3]
 
-def extraer_caracteristicas(ruta):
+def extraer_caracteristicas(ruta):     #2da definición -- extraemos características cuantitativas de las canciones por medio de la librería
     """
     Carga un archivo de audio y extrae las caracteristicas 
     cuantificables más relevantes con Librosa
     """
 
-    y, sr = librosa.load(ruta)
+    y, sr = librosa.load(ruta)  #y, sr son las variables que asignamos para obtener las variables (se usan dos porque la librería pide 2 parámetros)
 
 #TEMPO (BPM)
     tempo, _ = librosa.beat.beat_track(y=y, sr=sr)
@@ -156,7 +156,7 @@ def extraer_caracteristicas(ruta):
     onsets = librosa.onset.onset_detect(y=y, sr=sr, units="time")
     tiempo_primer_pico = float((onsets[0]) if len(onsets) > 0 else 0.0)
  
-    return {               #Explicar
+    return {               #Nos devuelve los datos númericos que extrajimos y los asignamos a las variables con el mismo nombre
         "tempo": tempo,
         "energia": energia,
         "brillantez": brillantez, 
@@ -167,12 +167,12 @@ def extraer_caracteristicas(ruta):
         "tiempo_primer_pico": tiempo_primer_pico,
     }
 
-def calcular_puntajes(caracteristicas):
+def calcular_puntajes(caracteristicas):  #3ra definición -- Por medio de cálculos matemáticos calculamos los puntajes subjetivos sobre la "raw_data"
     """
     Aplica los rangos subjetivos a cada característica numérica y
     calcula el puntaje final ponderado
     """
-    puntaje_tempo = asignar_puntaje(caracteristicas["tempo"], RANGOS_TEMPO)
+    puntaje_tempo = asignar_puntaje(caracteristicas["tempo"], RANGOS_TEMPO) #asignamos puntaje combinando la 1. definición asignar puntaje, 2. caracteristicas (variable a analizar) (es la raw_data) y 3. los rangos de la tupla
     puntaje_energia = asignar_puntaje(caracteristicas["energia"], RANGOS_ENERGIA)
     puntaje_brillantez = asignar_puntaje(caracteristicas["brillantez"], RANGOS_BRILLANTEZ)
     puntaje_ancho = asignar_puntaje(caracteristicas["ancho_banda"], RANGOS_ANCHO_BANDA)
@@ -180,7 +180,7 @@ def calcular_puntajes(caracteristicas):
     puntaje_contraste = asignar_puntaje(caracteristicas["contraste"], RANGOS_CONTRASTE)
 
     puntaje_final= (
-        puntaje_tempo * PONDERACION["tempo"]
+        puntaje_tempo * PONDERACION["tempo"]  #Calculamos el puntaje obtenido con la ponderación subjetiva que establecimos previamente
         + puntaje_energia * PONDERACION["energia"]
         + puntaje_brillantez * PONDERACION["brillantez"]
         + puntaje_ancho * PONDERACION["ancho_banda"]
@@ -189,7 +189,7 @@ def calcular_puntajes(caracteristicas):
     )
 
     return {
-        "puntaje_tempo": round(puntaje_tempo, 2),
+        "puntaje_tempo": round(puntaje_tempo, 2),   #Nos devuelve el puntaje (de 0 a 100) con 2 decimales
         "puntaje_energia": round(puntaje_energia, 2),
         "puntaje_brillantez": round(puntaje_brillantez, 2),
         "puntaje_ancho_banda": round(puntaje_ancho, 2),
@@ -200,18 +200,18 @@ def calcular_puntajes(caracteristicas):
 
 #Interfaz del usuario:
 
-st.title("🎵 Analizador de Mis Canciones Favoritas")
+st.title("🎵 Analizador de Mis Canciones Favoritas")   #Creamos los títulos y subtítulos de la página web
 st.markdown(" Análisis musical con **Librosa** Parcial I - Programación")
-st.divider()
+st.divider()  #Permite esconder el código
 
 
 #SIDEBAR
 
-with st.sidebar:
+with st.sidebar:   #Pestaña de configuración
     st.header("⚙️ Configuración")
 
     #Verficar que la carpeta existe
-    if not os.path.isdir(CARPETA_CANCIONES):
+    if not os.path.isdir(CARPETA_CANCIONES):  #Mensaje de error en caso no salga o cargue la carpeta
         st.error(
             f"No se econtró la carpeta de canciones. \n\n"
             f"Ruta buscada: \n'{os.path.abspath(CARPETA_CANCIONES)}"
@@ -225,7 +225,7 @@ with st.sidebar:
 
 #Selección de canciones:
 
-st.subheader("📁 Canciones")
+st.subheader("📁 Canciones")                #Crea la pestaña donde se ponen en display las canciones descargadas en la carpeta
 canciones_seleccionadas = st.multiselect(
     "Elige las canciones a analizar:",
     options = archivos_disponibles,
@@ -236,10 +236,10 @@ canciones_seleccionadas = st.multiselect(
 st.divider()
 
 #Slider de pesos
-st.subheader("⚖️ Pesos del puntaje final")
+st.subheader("⚖️ Pesos del puntaje final")     #Barra interactiva para ajustar las ponderaciones a gusto del usuario
 st.caption("Mueve los sliders para cambiar cuánto influye cada característica.")
 
-w_tempo = st.slider("🥁 Tempo",          0, 10, 7)
+w_tempo = st.slider("🥁 Tempo",          0, 10, 7)  #Rango del slider (inicio, fin, valor preestablecido)
 w_energia = st.slider("⚡ Energía",         0, 10, 5)
 w_brillantez = st.slider("✨ Brillantez",      0, 10, 3)
 w_ancho = st.slider("📊 Ancho de banda",  0, 10, 2)
@@ -259,7 +259,7 @@ PONDERACION = {
     "contraste": w_contraste / total,
 }
 
-st.caption(
+st.caption(          #Pestaña visible donde se actualizan los porcentajes linkeados a la barra interactiva que coloca el usuario
     f"Tempo {PONDERACION["tempo"]:.0%} · Energía {PONDERACION["energia"]: .0%} · "
     f"Brillantez {PONDERACION["brillantez"]: .0%} · Ancho {PONDERACION["ancho_banda"]: .0%} · "
     f"ZCR {PONDERACION["zcr"]: .0%} · Contraste {PONDERACION["contraste"]: .0%}"
@@ -287,16 +287,16 @@ if not canciones_seleccionadas:
 
 #ANÁLISIS
 
-resultados = []
+resultados = []  #Aqui se guarda la variable resultados como contador para almacenar los datos finales de la canción
 barra = st.progress(0, text="Inciando análisis...")
 
-for i, archivo in enumerate(canciones_seleccionadas):
-    barra.progress(i / len(canciones_seleccionadas), text = f"Analizando: {archivo}...")
+for i, archivo in enumerate(canciones_seleccionadas):   #Ciclo que recorre todas las canciones seleccionadas
+    barra.progress(i / len(canciones_seleccionadas), text = f"Analizando: {archivo}...")   #Actualiza la barra de progreso mientras revisa la data
     ruta = os.path.join(CARPETA_CANCIONES, archivo)
 
-    try:
-        caracteristicas = extraer_caracteristicas(ruta) ### analizar que significa esta ruta
-        puntajes = calcular_puntajes(caracteristicas)
+    try:   #Ejecutar este bloque
+        caracteristicas = extraer_caracteristicas(ruta) # Aqui se analiza la canción (raw data)
+        puntajes = calcular_puntajes(caracteristicas) #Calcula los puntajes con la definición establecida previamente
 
         nombre_limpio = os.path.splitext(archivo)[0] #quita el .mp3
         fila = {"cancion": nombre_limpio}
@@ -314,12 +314,15 @@ if not resultados:
 
 
 #Construir DataFrame
-df = pd.DataFrame(resultados)
-df = df.sort_values(by="puntaje_final", ascending=False).reset_index(drop=True)
+
+df = pd.DataFrame(resultados)  #Convierte la lista de resultados en una tabla
+df = df.sort_values(by="puntaje_final", ascending=False).reset_index(drop=True) #La ordena por puntaje
+df.index = df.index + 1
 numericas = df.select_dtypes(include=[float, int]).columns
 df[numericas] = df[numericas].round(2)
 
 
+#Sección decorativa de la página web
 #SECCIÓN 1: RANKING CON MÉTRICAS DESTACADAS
 
 st.header("🏆 Ranking de canciones")
@@ -366,7 +369,7 @@ st.dataframe(
     .background_gradient(subset=["Energía"], cmap="Oranges")
     .background_gradient(subset=["Contraste (dB)"], cmap="Purples")
     .format({
-        "Energía": "{:.4f}",
+        "Energía": "{:.2f}",
         "Puntaje Final": "{:.2f}",
     }),
     use_container_width=True,
