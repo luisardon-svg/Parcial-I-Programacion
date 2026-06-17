@@ -369,7 +369,11 @@ st.dataframe(
     .background_gradient(subset=["Energía"], cmap="Oranges")
     .background_gradient(subset=["Contraste (dB)"], cmap="Purples")
     .format({
+        "Tempo": "{:.2f}",
         "Energía": "{:.2f}",
+        "Brillantez": "{:.2f}",
+        "Contraste": "{:.2f}",
+        "Duracion": "{:.2f}",
         "Puntaje Final": "{:.2f}",
     }),
     use_container_width=True,
