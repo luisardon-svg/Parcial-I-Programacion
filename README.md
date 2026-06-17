@@ -46,13 +46,15 @@ La aplicación extrae características musicales como tempo, energía, brillante
 ## 📌 Características principales
 
 - Carga y análisis de canciones en formato `.mp3`
+  
 - Extracción de características musicales:
-  - Tempo
-  - Energía
-  - Brillantez
-  - Ancho de banda
-  - ZCR
-  - Contraste
+  - Tempo: qué tan rápida es la canción
+  - Energía: qué tan intensa se siente
+  - Brillantez: qué tan aguda o clara suena.
+  - Ancho de banda: qué tan variado es el rango de sonidos
+  - ZCR: qué tan ruidoso, cortante o percusivo puede ser el sonido
+  - Contraste: qué tanto se diferencian los sonidos entre sí
+    
 - Cálculo de puntajes por canción
 - Ranking de canciones según su puntaje final
 - Visualización de resultados en una app interactiva con Streamlit
