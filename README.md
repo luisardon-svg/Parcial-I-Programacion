@@ -1,6 +1,6 @@
 # Parcial-I-Programacion
 
-* PROPÓSITO DEL PROYECTO* 
+*PROPÓSITO DEL PROYECTO* 
 
 Aqui se encuentra mi proyecto llamado: ¿Cómo cuantifficar mi gusto por la música? Realizado utilizando la librería de python librosa. 
 Yo sé que todos tenemos una canción favorita; independientemente de su ritmo, el artista que la escribió, si es popular o no, si te hace llorar, saltar, cantar, lo que sea. Sin embargo, alguna vez se preguntaron: ¿Por qué? ¿Qué tiene esta canción que me hace sentir diferente? ¿Cuál es la magia de la música? Muchos piensan que esta es una pregunta sin respuesta, ya que la música es, al final del día, un gusto simple y subjetivo, ¿no? Bueno, yo opino que no del todo y la librería “Librosa” me ayudará a demostrarlo. 
