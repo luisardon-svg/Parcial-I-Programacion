@@ -12,6 +12,30 @@ Librosa es una librería de Python utilizada para analizar audio, especialmente 
 Mi propósito con este programa es analizar, ¿Qué aspectos hacen que tu canción favorita, sea tu canción favorita? Con esta librería puedo analizar los datos cuantificables de mis canciones favoritas, su ritmo, su BPM, armonía, energía y estructura; puedo compararlas e inferir que tipo de canciones y que características en su composición musical son las que hacen que una canción me guste o no. 
 
 
+## 🎵 Sobre los archivos de audio
+
+Este repositorio **no incluye los archivos MP3** de las canciones analizadas, debido a restricciones de derechos de autor. La carpeta `Canciones_favs/` está excluida mediante `.gitignore`.
+
+Los resultados del análisis ya generados se encuentran en `resultados_analisis.csv`, por lo que no es necesario tener los audios para revisar los datos obtenidos.
+
+### ¿Quieres analizar tus propias canciones?
+
+1. Dentro de la carpeta del proyecto (la misma que descargaste o clonaste de este repositorio), crea una carpeta llamada `Canciones_favs`.
+2. Coloca ahí tus archivos `.mp3` (los que quieras analizar).
+3. Asegúrate de tener instaladas las dependencias necesarias:
+```bash
+   pip install librosa pandas numpy streamlit
+```
+4. Ejecuta el script de análisis:
+```bash
+   cd Codigo
+   python analizar.py
+```
+   O, si prefieres la versión interactiva con interfaz web:
+```bash
+   python -m streamlit run app.py
+```
+
 # 🎵 Analizador Musical con Python
 
 Este proyecto permite analizar canciones en formato `.mp3` usando Python y librerías de análisis de audio.  
