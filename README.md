@@ -1,27 +1,28 @@
 # Parcial-I-Programacion
 
-*PROPÓSITO DEL PROYECTO* 
+🎵 ¿Cómo cuantificar mi gusto por la música?
 
-Aqui se encuentra mi proyecto llamado: ¿Cómo cuantificar mi gusto por la música? Utilizando la librería de python librosa. 
-Yo sé que todos tenemos una canción favorita; independientemente de su ritmo, el artista que la escribió, si es popular o no, si te hace llorar, saltar, cantar, lo que sea. Sin embargo, alguna vez se preguntaron: ¿Por qué? ¿Qué tiene esta canción que me hace sentir diferente? ¿Cuál es la magia de la música? Muchos piensan que esta es una pregunta sin respuesta, ya que la música es, al final del día, un gusto simple y subjetivo, ¿no? Bueno, yo opino que no del todo y la librería “Librosa” me ayudará a demostrarlo. 
+Proyecto del Parcial I de Programación. Analiza características musicales cuantificables de canciones favoritas usando la librería de Python Librosa, y genera un puntaje personalizado que intenta responder: ¿qué tiene una canción que hace que me guste?
 
-Una composición musical, ya sea una canción de reggaetón, pop, country, balada, etcétera, tiene características muy puntuales que la definen. Tienen un ritmo, una melodía, una letra, un conjunto de coros y versos que hacen que cada canción se sienta como una experiencia totalmente única. Es decir, toda una composición musical tiene características cuantificables que podemos medir, analizar e interpretar. Es aquí donde entra la librería “Librosa”.
+Sobre el proyecto
 
-Librosa es una librería de Python utilizada para analizar audio, especialmente música. Sirve para convertir una canción, una grabación, o un sonido en datos numéricos que Python puede estudiar. Esta librería puede detectar ritmo, volumen, tono, duración, energía, frecuencias, espectrogramas, entre muchas otras. 
+Todos tenemos una canción favorita, sin importar su ritmo, el artista que la escribió, o si es popular o no. Pero, ¿por qué nos gusta? ¿Qué tiene esa canción que la hace sentir diferente? Muchos piensan que es una pregunta sin respuesta, ya que la música es, al final del día, un gusto subjetivo. Este proyecto plantea que no del todo, y usa la librería Librosa para demostrarlo.
 
-Mi propósito con este programa es analizar, ¿Qué aspectos hacen que tu canción favorita, sea tu canción favorita? Con esta librería puedo analizar los datos cuantificables de mis canciones favoritas, su ritmo, su BPM, armonía, energía y estructura; puedo compararlas e inferir que tipo de canciones y que características en su composición musical son las que hacen que una canción me guste o no. 
+Toda composición musical, sea reggaetón, pop, country o balada, tiene un ritmo, una melodía, una estructura de coros y versos que la hacen sentir como una experiencia única. Es decir, tiene características cuantificables que se pueden medir, analizar e interpretar. Librosa convierte una canción en datos numéricos que Python puede estudiar: ritmo, volumen, tono, energía, frecuencias, y más.
 
-## 🎵 Sobre los archivos de audio
+El propósito de este programa es analizar qué aspectos de la composición musical (tempo, energía, armonía, brillantez, entre otros) hacen que una canción favorita lo sea, comparando varias canciones entre sí e infiriendo qué características comparten.
 
-Este repositorio **no incluye los archivos MP3** de las canciones analizadas, debido a restricciones de derechos de autor. La carpeta `Canciones_favs/` está excluida mediante `.gitignore`.
+🎧 Sobre los archivos de audio
 
-Los resultados del análisis ya generados se encuentran en `resultados_analisis.csv`, por lo que no es necesario tener los audios para revisar los datos obtenidos.
+Este repositorio no incluye los archivos MP3 de las canciones analizadas, por restricciones de derechos de autor. La carpeta Canciones_favs/ está excluida mediante .gitignore.
 
-⚠️ Estructura de carpetas necesaria (importante)
+Los resultados ya generados están disponibles en resultados_analisis.csv, así que no es necesario tener los audios para revisar los datos obtenidos.
 
-Para que el código funcione, la carpeta Canciones_favs debe estar ubicada en la misma carpeta donde están analizar.py. Es decir, así:
+⚠️ Estructura de carpetas necesaria
 
-TuCarpetaDescargada/
+Para que el código funcione, la carpeta Canciones_favs debe estar en la misma carpeta donde están analizar.py y app.py:
+
+CarpetaDelProyecto/
 ├── Canciones_favs/      ← tus archivos .mp3 van aquí
 │   ├── cancion1.mp3
 │   ├── cancion2.mp3
@@ -31,123 +32,87 @@ TuCarpetaDescargada/
 ├── .gitignore
 └── README.md
 
-No funcionará si colocas Canciones_favs en otra ubicación (ej. un nivel arriba o adentro de otra subcarpeta). El nombre de la carpeta debe ser exactamente Canciones_favs (con esa mayúscula y guion bajo).
+El nombre debe ser exactamente Canciones_favs (esa mayúscula y ese guion bajo). Si el script no la encuentra, la terminal mostrará exactamente qué rutas intentó, para ayudarte a corregirlo.
 
-Si el script no encuentra la carpeta, mostrará en la terminal exactamente qué rutas intentó, para ayudarte a corregirlo.
+📌 Características analizadas
 
-### ¿Quieres analizar tus propias canciones?
 
-1. Dentro de la carpeta del proyecto (la misma que descargaste o clonaste de este repositorio), crea una carpeta llamada `Canciones_favs`.
-2. Coloca ahí tus archivos `.mp3` (los que quieras analizar).
-3. Asegúrate de tener instaladas las dependencias necesarias:
-```bash
-   pip install librosa pandas numpy streamlit mathplotlib
-```
----
-🌐 Cómo correr la app web interactiva (Streamlit)
+Tempo: qué tan rápida es la canción (BPM)
+Energía: qué tan intensa/fuerte se siente (RMS)
+Brillantez: qué tan aguda o clara suena (centroide espectral)
+Ancho de banda: qué tan variado es el rango de sonidos
+Zero crossing rate (ZCR): qué tan ruidosa o percusiva es la señal
+Contraste espectral: qué tan definido/nítido suena
+Nota dominante: la nota musical que predomina
+Duración
 
-Antes de correrla, verifica que estás parado (con cd) en la carpeta correcta — la que contiene app.py directamente. Si la terminal no está en esa ubicación exacta, el comando va a fallar con un error de tipo File does not exist.
 
-Para confirmar dónde estás parado:
+Cada característica se convierte en un puntaje subjetivo según rangos configurables en el código, y se combinan en un puntaje final ponderado por canción.
 
-bash
-pwd
+🛠️ Tecnologías utilizadas
 
-(en Windows con PowerShell, puedes usar cd sin argumentos, o dir para ver el contenido de la carpeta actual)
 
-Una vez confirmada la ruta correcta:
----
+Python
+Librosa
+Pandas
+NumPy
+Streamlit (para la app web interactiva)
 
-4. Ejecuta el script de análisis:
-```bash
-   cd TuCarpetaDescargada
-   python -m streamlit run analizar.py #Código para Windows
-   python3 -m streamlit run analizar.py #Código para MaC
-```
 
-# 🎵 Analizador Musical con Python
+📦 Instalación
 
-Este proyecto permite analizar canciones en formato `.mp3` usando Python y librerías de análisis de audio.  
-La aplicación extrae características musicales como tempo, energía, brillantez, ancho de banda, ZCR y contraste para comparar canciones y generar un puntaje final.
+bashpip install librosa pandas numpy streamlit
 
----
+▶️ Cómo correr el análisis por consola
 
-## 📌 Características principales
+Este modo imprime las tablas en la terminal y genera resultados_analisis.csv. Usa el archivo analizar.py.
 
-- Carga y análisis de canciones en formato `.mp3`
-  
-- Extracción de características musicales:
-  - Tempo: qué tan rápida es la canción
-  - Energía: qué tan intensa se siente
-  - Brillantez: qué tan aguda o clara suena.
-  - Ancho de banda: qué tan variado es el rango de sonidos
-  - ZCR: qué tan ruidoso, cortante o percusivo puede ser el sonido
-  - Contraste: qué tanto se diferencian los sonidos entre sí
-    
-- Cálculo de puntajes por canción
-- Ranking de canciones según su puntaje final
-- Visualización de resultados en una app interactiva con Streamlit
 
----
+Descarga o clona el repositorio completo (necesitas todos los archivos, incluyendo .gitignore).
+Abre una terminal y navega hasta la carpeta donde está analizar.py. Para confirmar que estás en el lugar correcto:
 
-## 🛠️ Tecnologías utilizadas
 
-- Python
-- Streamlit
-- Pandas
-- Librosa
-- NumPy
-- Mathplotlib
+bash   pwd       # Mac/Linux
+   cd        # Windows (sin argumentos, muestra la ruta actual)
 
----
 
-## ▶️ Cómo correr el programa
+Ejecuta:
 
-Para ejecutar correctamente este proyecto, sigue estos pasos:
 
-### 1. Descargar el repositorio
+bash   python analizar.py      # Windows
+   python3 analizar.py     # Mac
 
-Descarga o clona el repositorio completo desde la rama **main**.
+🌐 Cómo correr la app web interactiva
 
-Es importante utilizar todos los archivos del proyecto, ya que el programa necesita la estructura completa de carpetas para funcionar correctamente.
+Este modo abre una página interactiva con tablas, colores, gráficas y sliders. Usa el archivo app.py — no analizar.py.
 
----
 
-### 2. Abrir la terminal
+⚠️ Antes de correrla, confirma tu ubicación. Si la terminal no está parada exactamente en la carpeta que contiene app.py, el comando fallará con un error como File does not exist.
 
-Una vez descargado el repositorio, abre la terminal.
 
-> ⚠️ **IMPORTANTE:**  
-> No ejecutes el archivo directamente desde Python.  
-> El programa debe correrse desde la terminal usando Streamlit.
 
----
 
-### 3. Entrar a la carpeta del código
+Verifica dónde estás parado:
 
-En la terminal, copia y pega el siguiente comando:
 
-```bash
-cd "C:\Users\Lenovo\OneDrive - Universidad Francisco Marroquin\Escritorio\Parcial I\Parcial-I-Programacion\Codigo"
+bash   pwd       # Mac/Linux
+   cd        # Windows
 
-### 4. Ejecutar la página web
+Si no es la carpeta correcta, navega con cd "ruta\a\tu\carpeta".
 
-Luego, copia y pega este comando en la terminal:
 
-```bash
-python -m streamlit run analizar.py
-```
+Ejecuta:
 
----
 
-### 5. Abrir la aplicación
+bash   python -m streamlit run app.py      # Windows
+   python3 -m streamlit run app.py     # Mac
 
-Después de ejecutar el comando anterior, Streamlit abrirá la página web automáticamente en tu navegador.
+(Si el comando streamlit se reconoce directamente en tu sistema, también puedes usar streamlit run app.py sin el python -m al inicio.)
 
-Si no se abre automáticamente, copia el enlace que aparece en la terminal y pégalo en tu navegador.
 
-Normalmente se verá parecido a esto:
+Se abrirá automáticamente en tu navegador en http://localhost:8501. Si no se abre solo, copia esa URL y pégala manualmente.
 
-```text
-http://localhost:8501
-```
+
+🩹 Solución de problemas comunes
+
+ErrorCausa probableSoluciónFile does not exist: app.pyLa terminal no está en la carpeta donde vive app.pyVerifica con pwd/cd y navega a la carpeta correctaModuleNotFoundError: No module named 'streamlit' (o librosa, pandas)Falta instalar la libreríapip install librosa pandas numpy streamlitERROR: no se encontró la carpeta 'Canciones_favs'...La carpeta no existe, está mal ubicada, o tiene otro nombreRevisa la sección de estructura de carpetas arribaLa página de Streamlit aparece vacía o con errores rarosSe ejecutó streamlit run analizar.py por errorUsa app.py, no analizar.py, para la versión web
