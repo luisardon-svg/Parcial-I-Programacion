@@ -2,7 +2,7 @@
 
 *PROPÓSITO DEL PROYECTO* 
 
-Aqui se encuentra mi proyecto llamado: ¿Cómo cuantifficar mi gusto por la música? Realizado utilizando la librería de python librosa. 
+Aqui se encuentra mi proyecto llamado: ¿Cómo cuantificar mi gusto por la música? Utilizando la librería de python librosa. 
 Yo sé que todos tenemos una canción favorita; independientemente de su ritmo, el artista que la escribió, si es popular o no, si te hace llorar, saltar, cantar, lo que sea. Sin embargo, alguna vez se preguntaron: ¿Por qué? ¿Qué tiene esta canción que me hace sentir diferente? ¿Cuál es la magia de la música? Muchos piensan que esta es una pregunta sin respuesta, ya que la música es, al final del día, un gusto simple y subjetivo, ¿no? Bueno, yo opino que no del todo y la librería “Librosa” me ayudará a demostrarlo. 
 
 Una composición musical, ya sea una canción de reggaetón, pop, country, balada, etcétera, tiene características muy puntuales que la definen. Tienen un ritmo, una melodía, una letra, un conjunto de coros y versos que hacen que cada canción se sienta como una experiencia totalmente única. Es decir, toda una composición musical tiene características cuantificables que podemos medir, analizar e interpretar. Es aquí donde entra la librería “Librosa”.
@@ -17,22 +17,52 @@ Este repositorio **no incluye los archivos MP3** de las canciones analizadas, de
 
 Los resultados del análisis ya generados se encuentran en `resultados_analisis.csv`, por lo que no es necesario tener los audios para revisar los datos obtenidos.
 
+⚠️ Estructura de carpetas necesaria (importante)
+
+Para que el código funcione, la carpeta Canciones_favs debe estar ubicada en la misma carpeta donde están analizar.py. Es decir, así:
+
+TuCarpetaDescargada/
+├── Canciones_favs/      ← tus archivos .mp3 van aquí
+│   ├── cancion1.mp3
+│   ├── cancion2.mp3
+│   └── ...
+├── analizar.py
+├── app.py
+├── .gitignore
+└── README.md
+
+No funcionará si colocas Canciones_favs en otra ubicación (ej. un nivel arriba o adentro de otra subcarpeta). El nombre de la carpeta debe ser exactamente Canciones_favs (con esa mayúscula y guion bajo).
+
+Si el script no encuentra la carpeta, mostrará en la terminal exactamente qué rutas intentó, para ayudarte a corregirlo.
+
 ### ¿Quieres analizar tus propias canciones?
 
 1. Dentro de la carpeta del proyecto (la misma que descargaste o clonaste de este repositorio), crea una carpeta llamada `Canciones_favs`.
 2. Coloca ahí tus archivos `.mp3` (los que quieras analizar).
 3. Asegúrate de tener instaladas las dependencias necesarias:
 ```bash
-   pip install librosa pandas numpy streamlit
+   pip install librosa pandas numpy streamlit mathplotlib
 ```
+---
+🌐 Cómo correr la app web interactiva (Streamlit)
+
+Antes de correrla, verifica que estás parado (con cd) en la carpeta correcta — la que contiene app.py directamente. Si la terminal no está en esa ubicación exacta, el comando va a fallar con un error de tipo File does not exist.
+
+Para confirmar dónde estás parado:
+
+bash
+pwd
+
+(en Windows con PowerShell, puedes usar cd sin argumentos, o dir para ver el contenido de la carpeta actual)
+
+Una vez confirmada la ruta correcta:
+---
+
 4. Ejecuta el script de análisis:
 ```bash
-   cd Codigo
-   python analizar.py
-```
-   O, si prefieres la versión interactiva con interfaz web:
-```bash
-   python -m streamlit run app.py
+   cd TuCarpetaDescargada
+   python -m streamlit run analizar.py #Código para Windows
+   python3 -m streamlit run analizar.py #Código para MaC
 ```
 
 # 🎵 Analizador Musical con Python
@@ -67,6 +97,7 @@ La aplicación extrae características musicales como tempo, energía, brillante
 - Pandas
 - Librosa
 - NumPy
+- Mathplotlib
 
 ---
 
