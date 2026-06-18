@@ -58,24 +58,8 @@ Cada característica se convierte en un puntaje subjetivo según rangos configur
 ## 📦 Instalación
 
 ```bash
-pip install librosa pandas numpy streamlit
+pip install librosa pandas numpy streamlit mathplotlib
 ```
-
-## ▶️ Cómo correr el análisis por consola
-
-Este modo imprime las tablas en la terminal y genera `resultados_analisis.csv`. Usa el archivo **`analizar.py`**.
-
-1. Descarga o clona el repositorio completo (necesitas todos los archivos, incluyendo `.gitignore`).
-2. Abre una terminal y navega hasta la carpeta donde está `analizar.py`. Para confirmar que estás en el lugar correcto:
-   ```bash
-   pwd       # Mac/Linux
-   cd        # Windows (sin argumentos, muestra la ruta actual)
-   ```
-3. Ejecuta:
-   ```bash
-   python analizar.py      # Windows
-   python3 analizar.py     # Mac
-   ```
 
 ## 🌐 Cómo correr la app web interactiva
 
@@ -92,8 +76,8 @@ Este modo abre una página interactiva con tablas, colores, gráficas y sliders.
 
 2. Ejecuta:
    ```bash
-   python -m streamlit run app.py      # Windows
-   python3 -m streamlit run app.py     # Mac
+   python -m streamlit run analizar.py      # Windows
+   python3 -m streamlit run analizar.py     # Mac
    ```
    (Si el comando `streamlit` se reconoce directamente en tu sistema, también puedes usar `streamlit run app.py` sin el `python -m` al inicio.)
 
