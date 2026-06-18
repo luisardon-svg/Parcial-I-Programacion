@@ -14,11 +14,11 @@ El propósito de este programa es analizar qué aspectos de la composición musi
 
 Este repositorio **no incluye los archivos MP3** de las canciones analizadas, por restricciones de derechos de autor. La carpeta `Canciones_favs/` está excluida mediante `.gitignore`.
 
-Los resultados ya generados están disponibles en `resultados_analisis.csv`, así que no es necesario tener los audios para revisar los datos obtenidos.
+El usuario debe crear su propia carpeta e incluirle las canciones (en .mp3) que desea analizar.
 
 ## ⚠️ Estructura de carpetas necesaria
 
-Para que el código funcione, la carpeta `Canciones_favs` debe estar **en la misma carpeta** donde están `analizar.py` y `app.py`:
+Para que el código funcione, la carpeta `Canciones_favs` (creada por el usuario) debe estar **en la misma carpeta** donde están `analizar.py`:
 
 ```
 CarpetaDelProyecto/
@@ -27,7 +27,6 @@ CarpetaDelProyecto/
 │   ├── cancion2.mp3
 │   └── ...
 ├── analizar.py
-├── app.py
 ├── .gitignore
 └── README.md
 ```
@@ -63,9 +62,9 @@ pip install librosa pandas numpy streamlit mathplotlib
 
 ## 🌐 Cómo correr la app web interactiva
 
-Este modo abre una página interactiva con tablas, colores, gráficas y sliders. Usa el archivo **`app.py`** — no `analizar.py`.
+Este modo abre una página interactiva con tablas, colores, gráficas y sliders. Usa el archivo `analizar.py`.
 
-> ⚠️ **Antes de correrla, confirma tu ubicación.** Si la terminal no está parada exactamente en la carpeta que contiene `app.py`, el comando fallará con un error como `File does not exist`.
+> ⚠️ **Antes de correrla, confirma tu ubicación.** Si la terminal no está parada exactamente en la carpeta que contiene `analizar.py`, el comando fallará con un error como `File does not exist`.
 
 1. Verifica dónde estás parado:
    ```bash
@@ -90,4 +89,4 @@ Este modo abre una página interactiva con tablas, colores, gráficas y sliders.
 | `File does not exist: app.py` | La terminal no está en la carpeta donde vive `app.py` | Verifica con `pwd`/`cd` y navega a la carpeta correcta |
 | `ModuleNotFoundError: No module named 'streamlit'` (o `librosa`, `pandas`) | Falta instalar la librería | `pip install librosa pandas numpy streamlit` |
 | `ERROR: no se encontró la carpeta 'Canciones_favs'...` | La carpeta no existe, está mal ubicada, o tiene otro nombre | Revisa la sección de estructura de carpetas arriba |
-| La página de Streamlit aparece vacía o con errores raros | Se ejecutó `streamlit run analizar.py` por error | Usa `app.py`, no `analizar.py`, para la versión web |
+| La página de Streamlit aparece vacía o con errores raros | Se ejecutó `streamlit run analizar.py` por error | Usa `analizar.py`, para la versión web |
